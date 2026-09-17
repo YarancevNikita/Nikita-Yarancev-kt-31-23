@@ -1,0 +1,6 @@
+@Nikita_Yarancev_kt_31_23_HostAddress = http://localhost:5234
+
+GET {{Nikita_Yarancev_kt_31_23_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
