@@ -38,15 +38,17 @@ namespace Nikita_Yarancev_kt_31_23.Database.Configurations
                 .HasColumnType(ColumnType.String).HasMaxLength(100)
                 .HasComment("Фамилия студента");
 
-            builder.Property(p => p.MiddleName)
-                .HasColumnName("c_student_middlename")
-                .HasColumnType(ColumnType.String).HasMaxLength(100)
-                .HasComment("Отчество студента");
-
             builder.Property(p => p.GroupId)
                 .IsRequired()
                 .HasColumnName("f_group_id")
                 .HasComment("Идентификатор группы");
+
+            builder.Property(p => p.IsDeleted)
+                .IsRequired()
+                .HasColumnName("c_student_is_deleted")
+                .HasColumnType(ColumnType.Bool)
+                .HasDefaultValue(false)
+                .HasComment("Признак удаления записи");
 
             //Связь: у студента одна группа, у группы много студентов
             builder.ToTable(TableName)
