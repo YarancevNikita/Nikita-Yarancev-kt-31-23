@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Nikita_Yarancev_kt_31_23.Filters.GroupFilters;
 using Nikita_Yarancev_kt_31_23.Interfaces.GroupsInterfaces;
+using Nikita_Yarancev_kt_31_23.Requests;
 
 namespace Nikita_Yarancev_kt_31_23.Controllers
 {
@@ -17,7 +18,8 @@ namespace Nikita_Yarancev_kt_31_23.Controllers
             _groupService = groupService;
         }
 
-        [HttpGet(Name = "GetGroups")]
+        /// <summary>Получить все группы (включая удаленные)</summary>
+        [HttpGet]
         public async Task<IActionResult> GetGroupsAsync(CancellationToken cancellationToken = default)
         {
             _logger.LogError("Method GetGroups was called");
@@ -27,14 +29,70 @@ namespace Nikita_Yarancev_kt_31_23.Controllers
             return Ok(groups);
         }
 
-        [HttpPost(Name = "GetGroupsBySpecialty")]
-        public async Task<IActionResult> GetGroupsBySpecialtyAsync(GroupSpecialtyFilter filter, CancellationToken cancellationToken = default)
+        /// <summary>Получить группу по id</summary>
+        [HttpGet("{groupId:int}")]
+        public async Task<IActionResult> GetGroupByIdAsync(int groupId, CancellationToken cancellationToken = default)
         {
-            _logger.LogError("Method GetGroupsBySpecialty was called");
+            _logger.LogError("Method GetGroupById was called");
 
-            var groups = await _groupService.GetGroupsBySpecialtyAsync(filter, cancellationToken);
+            var group = await _groupService.GetGroupByIdAsync(groupId, cancellationToken);
+
+            return Ok(group);
+        }
+
+        /// <summary>Получить группы с фильтрацией по специальности, году набора и статусу удаления</summary>
+        [HttpPost("filter")]
+        public async Task<IActionResult> GetGroupsByFilterAsync(GroupFilter filter, CancellationToken cancellationToken = default)
+        {
+            _logger.LogError("Method GetGroupsByFilter was called");
+
+            var groups = await _groupService.GetGroupsByFilterAsync(filter, cancellationToken);
 
             return Ok(groups);
+        }
+
+        /// <summary>Добавить группу</summary>
+        [HttpPost]
+        public async Task<IActionResult> AddGroupAsync(GroupRequest request, CancellationToken cancellationToken = default)
+        {
+            _logger.LogError("Method AddGroup was called");
+
+            var group = await _groupService.AddGroupAsync(request, cancellationToken);
+
+            return Ok(group);
+        }
+
+        /// <summary>Изменить группу</summary>
+        [HttpPut("{groupId:int}")]
+        public async Task<IActionResult> UpdateGroupAsync(int groupId, GroupRequest request, CancellationToken cancellationToken = default)
+        {
+            _logger.LogError("Method UpdateGroup was called");
+
+            var group = await _groupService.UpdateGroupAsync(groupId, request, cancellationToken);
+
+            return Ok(group);
+        }
+
+        /// <summary>Удалить группу (логически, вместе со всеми её студентами)</summary>
+        [HttpDelete("{groupId:int}")]
+        public async Task<IActionResult> DeleteGroupAsync(int groupId, CancellationToken cancellationToken = default)
+        {
+            _logger.LogError("Method DeleteGroup was called");
+
+            await _groupService.DeleteGroupAsync(groupId, cancellationToken);
+
+            return NoContent();
+        }
+
+        /// <summary>Восстановить удаленную группу (студенты восстанавливаются отдельно)</summary>
+        [HttpPut("{groupId:int}/restore")]
+        public async Task<IActionResult> RestoreGroupAsync(int groupId, CancellationToken cancellationToken = default)
+        {
+            _logger.LogError("Method RestoreGroup was called");
+
+            var group = await _groupService.RestoreGroupAsync(groupId, cancellationToken);
+
+            return Ok(group);
         }
     }
 }

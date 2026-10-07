@@ -37,6 +37,12 @@ namespace Nikita_Yarancev_kt_31_23.Database.Configurations
                 .HasColumnType(ColumnType.Int)
                 .HasComment("Курс обучения группы");
 
+            builder.Property(p => p.Year)
+                .IsRequired()
+                .HasColumnName("c_group_year")
+                .HasColumnType(ColumnType.Int)
+                .HasComment("Год набора группы");
+
             builder.Property(p => p.SpecialtyId)
                 .IsRequired()
                 .HasColumnName("f_specialty_id")

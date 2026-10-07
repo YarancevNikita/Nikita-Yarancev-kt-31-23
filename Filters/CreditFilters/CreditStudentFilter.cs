@@ -1,6 +1,6 @@
-namespace Nikita_Yarancev_kt_31_23.Filters.GradeFilters
+namespace Nikita_Yarancev_kt_31_23.Filters.CreditFilters
 {
-    public class GradeStudentFilter
+    public class CreditStudentFilter
     {
         /// <summary>Идентификатор студента</summary>
         public int StudentId { get; set; }

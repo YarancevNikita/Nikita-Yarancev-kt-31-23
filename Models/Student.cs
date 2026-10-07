@@ -8,6 +8,8 @@ namespace Nikita_Yarancev_kt_31_23.Models
 
         public string LastName { get; set; }
 
+        public string? MiddleName { get; set; }
+
         public int GroupId { get; set; }
 
         public Group Group { get; set; }

@@ -17,6 +17,8 @@ namespace Nikita_Yarancev_kt_31_23.Database
 
         public DbSet<Grade> Grades { get; set; }
 
+        public DbSet<Credit> Credits { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Добавляем конфигурации к таблицам
@@ -25,6 +27,7 @@ namespace Nikita_Yarancev_kt_31_23.Database
             modelBuilder.ApplyConfiguration(new StudentConfiguration());
             modelBuilder.ApplyConfiguration(new DisciplineConfiguration());
             modelBuilder.ApplyConfiguration(new GradeConfiguration());
+            modelBuilder.ApplyConfiguration(new CreditConfiguration());
         }
 
         public StudentDbContext(DbContextOptions<StudentDbContext> options) : base(options)

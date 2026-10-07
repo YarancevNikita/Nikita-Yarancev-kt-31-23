@@ -1,61 +1,82 @@
 @Nikita_Yarancev_kt_31_23_HostAddress = http://localhost:5234
 
-GET {{Nikita_Yarancev_kt_31_23_HostAddress}}/Specialties
-Accept: application/json
-
-###
-
 POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Specialties
 Content-Type: application/json
 
-{ "code": "09.03.01" }
-
-###
-
-GET {{Nikita_Yarancev_kt_31_23_HostAddress}}/Groups
-Accept: application/json
+{ "title": "Информатика и вычислительная техника", "code": "09.03.01" }
 
 ###
 
 POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Groups
 Content-Type: application/json
 
-{ "specialtyCode": "09.03.01" }
+{ "name": "KT-31-23", "course": 3, "year": 2023, "specialtyId": 1 }
 
 ###
 
-GET {{Nikita_Yarancev_kt_31_23_HostAddress}}/Students
-Accept: application/json
+POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Groups/filter
+Content-Type: application/json
+
+{ "specialtyId": 1, "year": 2023, "isDeleted": false }
 
 ###
 
 POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Students
 Content-Type: application/json
 
-{ "groupName": "KT-31-23" }
+{ "lastName": "Иванов", "firstName": "Иван", "middleName": "Иванович", "groupId": 1 }
 
 ###
 
-GET {{Nikita_Yarancev_kt_31_23_HostAddress}}/Disciplines
-Accept: application/json
+POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Students/filter
+Content-Type: application/json
+
+{ "groupName": "KT-31-23", "fio": "иванов", "isDeleted": false }
 
 ###
 
 POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Disciplines
 Content-Type: application/json
 
-{ "name": "Математика" }
+{ "name": "Математика", "direction": "Technical" }
 
 ###
 
-GET {{Nikita_Yarancev_kt_31_23_HostAddress}}/Grades
-Accept: application/json
+POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Disciplines/filter
+Content-Type: application/json
+
+{ "direction": "Technical", "isDeleted": false }
 
 ###
 
 POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Grades
 Content-Type: application/json
 
-{ "studentId": 1, "disciplineName": null }
+{ "studentId": 1, "disciplineId": 1, "value": 5, "date": "2025-01-15" }
+
+###
+
+POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Grades/average/group-discipline
+Content-Type: application/json
+
+{ "groupId": 1, "disciplineId": 1 }
+
+###
+
+POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Grades/average/year
+Content-Type: application/json
+
+{ "year": 2025 }
+
+###
+
+POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Credits
+Content-Type: application/json
+
+{ "studentId": 1, "disciplineId": 1, "isPassed": true, "date": "2025-01-10" }
+
+###
+
+DELETE {{Nikita_Yarancev_kt_31_23_HostAddress}}/Groups/1
 
 ###

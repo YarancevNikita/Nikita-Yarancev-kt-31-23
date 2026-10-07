@@ -38,6 +38,11 @@ namespace Nikita_Yarancev_kt_31_23.Database.Configurations
                 .HasColumnType(ColumnType.String).HasMaxLength(100)
                 .HasComment("Фамилия студента");
 
+            builder.Property(p => p.MiddleName)
+                .HasColumnName("c_student_middlename")
+                .HasColumnType(ColumnType.String).HasMaxLength(100)
+                .HasComment("Отчество студента");
+
             builder.Property(p => p.GroupId)
                 .IsRequired()
                 .HasColumnName("f_group_id")

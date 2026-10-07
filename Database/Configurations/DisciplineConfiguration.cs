@@ -31,6 +31,12 @@ namespace Nikita_Yarancev_kt_31_23.Database.Configurations
                 .HasColumnType(ColumnType.String).HasMaxLength(200)
                 .HasComment("Название дисциплины");
 
+            builder.Property(p => p.Direction)
+                .IsRequired()
+                .HasColumnName("c_discipline_direction")
+                .HasColumnType(ColumnType.Int)
+                .HasComment("Направление дисциплины: 1 - гуманитарное, 2 - техническое");
+
             builder.Property(p => p.IsDeleted)
                 .IsRequired()
                 .HasColumnName("c_discipline_is_deleted")

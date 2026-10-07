@@ -1,10 +1,10 @@
 namespace Nikita_Yarancev_kt_31_23.Models
 {
-    public class Grade
+    public class Credit
     {
-        public int GradeId { get; set; }
+        public int CreditId { get; set; }
 
-        public int Value { get; set; }
+        public bool IsPassed { get; set; }
 
         public DateOnly Date { get; set; }
 

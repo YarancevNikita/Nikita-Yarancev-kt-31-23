@@ -1,3 +1,4 @@
+using Nikita_Yarancev_kt_31_23.Interfaces.CreditsInterfaces;
 using Nikita_Yarancev_kt_31_23.Interfaces.DisciplinesInterfaces;
 using Nikita_Yarancev_kt_31_23.Interfaces.GradesInterfaces;
 using Nikita_Yarancev_kt_31_23.Interfaces.GroupsInterfaces;
@@ -15,6 +16,7 @@ namespace Nikita_Yarancev_kt_31_23.ServiceExtensions
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IDisciplineService, DisciplineService>();
             services.AddScoped<IGradeService, GradeService>();
+            services.AddScoped<ICreditService, CreditService>();
 
             return services;
         }

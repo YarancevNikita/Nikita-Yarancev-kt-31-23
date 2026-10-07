@@ -3,6 +3,7 @@ namespace Nikita_Yarancev_kt_31_23.Database.Helpers
     public class ColumnType
     {
         public const string Date = "timestamp";
+        public const string DateOnly = "date";
         public const string Guid = "uuid";
         public const string String = "varchar";
         public const string Text = "text";
