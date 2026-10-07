@@ -14,6 +14,8 @@ namespace Nikita_Yarancev_kt_31_23.Interfaces.DisciplinesInterfaces
 
         public Task<Discipline[]> GetDisciplinesByFilterAsync(DisciplineFilter filter, CancellationToken cancellationToken);
 
+        public Task<Discipline[]> GetDisciplinesByStudentNameAsync(DisciplineStudentNameFilter filter, CancellationToken cancellationToken);
+
         public Task<Discipline> AddDisciplineAsync(DisciplineRequest request, CancellationToken cancellationToken);
 
         public Task<Discipline> UpdateDisciplineAsync(int disciplineId, DisciplineRequest request, CancellationToken cancellationToken);
@@ -66,6 +68,22 @@ namespace Nikita_Yarancev_kt_31_23.Interfaces.DisciplinesInterfaces
             }
 
             var disciplines = await query
+                .OrderBy(o => o.Name)
+                .ToArrayAsync(cancellationToken);
+
+            return disciplines;
+        }
+
+        public async Task<Discipline[]> GetDisciplinesByStudentNameAsync(DisciplineStudentNameFilter filter, CancellationToken cancellationToken = default)
+        {
+            var studentName = filter.StudentName.Trim().ToLower();
+
+            //Берем дисциплины, по которым есть хотя бы одна оценка у студента с таким именем.
+            //Каждая дисциплина попадает в результат один раз, даже если оценок по ней несколько
+            var disciplines = await _dbContext.Set<Discipline>()
+                .Where(w => _dbContext.Set<Grade>().Any(g => g.DisciplineId == w.DisciplineId
+                    && g.Student.FirstName.ToLower() == studentName
+                    && !g.Student.IsDeleted))
                 .OrderBy(o => o.Name)
                 .ToArrayAsync(cancellationToken);
 

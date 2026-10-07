@@ -51,6 +51,17 @@ namespace Nikita_Yarancev_kt_31_23.Controllers
             return Ok(disciplines);
         }
 
+        /// <summary>Дисциплины, по которым есть оценки у студентов с указанным именем (без повторов)</summary>
+        [HttpPost("by-student-name")]
+        public async Task<IActionResult> GetDisciplinesByStudentNameAsync(DisciplineStudentNameFilter filter, CancellationToken cancellationToken = default)
+        {
+            _logger.LogError("Method GetDisciplinesByStudentName was called");
+
+            var disciplines = await _disciplineService.GetDisciplinesByStudentNameAsync(filter, cancellationToken);
+
+            return Ok(disciplines);
+        }
+
         /// <summary>Добавить дисциплину</summary>
         [HttpPost]
         public async Task<IActionResult> AddDisciplineAsync(DisciplineRequest request, CancellationToken cancellationToken = default)
