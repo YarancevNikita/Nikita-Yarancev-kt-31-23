@@ -17,6 +17,16 @@ namespace Nikita_Yarancev_kt_31_23.Controllers
             _studentService = studentService;
         }
 
+        [HttpGet(Name = "GetStudents")]
+        public async Task<IActionResult> GetStudentsAsync(CancellationToken cancellationToken = default)
+        {
+            _logger.LogError("Method GetStudents was called");
+
+            var students = await _studentService.GetStudentsAsync(cancellationToken);
+
+            return Ok(students);
+        }
+
         [HttpPost(Name = "GetStudentsByGroup")]
         public async Task<IActionResult> GetStudentsByGroupAsync(StudentGroupFilter filter, CancellationToken cancellationToken = default)
         {

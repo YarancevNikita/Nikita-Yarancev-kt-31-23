@@ -7,16 +7,27 @@
 
 ## Описание
 
-Веб-API на ASP.NET Core (.NET 9). Создан по шаблону «Веб-API ASP.NET Core» с контроллерами,
-поддержкой OpenAPI и отключённым HTTPS.
+Веб-API на ASP.NET Core (.NET 9) + EF Core (PostgreSQL), логирование NLog, Swagger UI.
 
 ## Структура
 
 - `Program.cs` — точка входа и конфигурация приложения
-- `Controllers/WeatherForecastController.cs` — тестовый контроллер шаблона
-- `WeatherForecast.cs` — модель данных
-- `appsettings.json`, `appsettings.Development.json` — настройки приложения
-- `Properties/launchSettings.json` — профили запуска
+- `Models/` — сущности: специальность, группа, студент, дисциплина, оценка
+- `Database/` — `StudentDbContext` и конфигурации таблиц
+- `Filters/` — классы-фильтры, принимаемые POST-методами контроллеров
+- `Interfaces/` — интерфейсы сервисов и их реализации
+- `ServiceExtensions/ServiceExtensions.cs` — регистрация сервисов в DI
+- `Controllers/` — контроллеры API
+
+## Методы API
+
+| Контроллер     | GET (все записи)          | POST (фильтр)                                         |
+|----------------|---------------------------|-------------------------------------------------------|
+| `/Specialties` | список специальностей     | по коду специальности — `{ "code": "09.03.01" }`      |
+| `/Groups`      | список групп              | по коду специальности — `{ "specialtyCode": "..." }`  |
+| `/Students`    | список студентов          | по названию группы — `{ "groupName": "KT-31-23" }`    |
+| `/Disciplines` | список дисциплин          | по названию — `{ "name": "Математика" }`              |
+| `/Grades`      | список оценок             | по студенту (+ дисциплина) — `{ "studentId": 1, "disciplineName": null }` |
 
 ## Запуск
 
@@ -24,4 +35,4 @@
 dotnet run
 ```
 
-Приложение стартует по адресу `http://localhost:5234`.
+Приложение стартует по адресу `http://localhost:5234`, Swagger — `http://localhost:5234/swagger`.

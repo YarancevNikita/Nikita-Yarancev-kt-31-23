@@ -1,6 +1,61 @@
 @Nikita_Yarancev_kt_31_23_HostAddress = http://localhost:5234
 
-GET {{Nikita_Yarancev_kt_31_23_HostAddress}}/weatherforecast/
+GET {{Nikita_Yarancev_kt_31_23_HostAddress}}/Specialties
 Accept: application/json
+
+###
+
+POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Specialties
+Content-Type: application/json
+
+{ "code": "09.03.01" }
+
+###
+
+GET {{Nikita_Yarancev_kt_31_23_HostAddress}}/Groups
+Accept: application/json
+
+###
+
+POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Groups
+Content-Type: application/json
+
+{ "specialtyCode": "09.03.01" }
+
+###
+
+GET {{Nikita_Yarancev_kt_31_23_HostAddress}}/Students
+Accept: application/json
+
+###
+
+POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Students
+Content-Type: application/json
+
+{ "groupName": "KT-31-23" }
+
+###
+
+GET {{Nikita_Yarancev_kt_31_23_HostAddress}}/Disciplines
+Accept: application/json
+
+###
+
+POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Disciplines
+Content-Type: application/json
+
+{ "name": "Математика" }
+
+###
+
+GET {{Nikita_Yarancev_kt_31_23_HostAddress}}/Grades
+Accept: application/json
+
+###
+
+POST {{Nikita_Yarancev_kt_31_23_HostAddress}}/Grades
+Content-Type: application/json
+
+{ "studentId": 1, "disciplineName": null }
 
 ###
